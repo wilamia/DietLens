@@ -33,6 +33,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
+        manifestPlaceholders["auth0ClientId"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
+        manifestPlaceholders["auth0Scheme"] = secrets.getProperty("AUTH0_SCHEME") ?: ""
+        manifestPlaceholders["auth0Domain"] = secrets.getProperty("AUTH0_DOMAIN") ?: ""
     }
 
     buildTypes {
@@ -51,10 +56,14 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    defaultConfig {
-        manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
-        buildConfigField("String", "MAPS_API_KEY", "\"${secrets.getProperty("MAPS_API_KEY") ?: ""}\"")
 
+    buildTypes {
+        debug {
+            manifestPlaceholders["AUTH0_CLIENT_ID"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
+        }
+        release {
+            manifestPlaceholders["AUTH0_CLIENT_ID"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
+        }
     }
     buildFeatures {
         compose = true
@@ -118,8 +127,10 @@ dependencies {
     implementation (libs.accompanist.permissions)
 
     //firebase
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
+    implementation(libs.material3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
