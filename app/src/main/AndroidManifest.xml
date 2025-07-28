@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:allowBackup="true"
         android:name=".MyApp"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -19,15 +19,17 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data android:scheme="${auth0Scheme}" android:host="${auth0Domain}" />
             </intent-filter>
+
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="${MAPS_API_KEY}" />
         <meta-data
             android:name="com.auth0.client_id"
-            android:value="${AUTH0_CLIENT_ID}" />
-
+            android:value="${auth0ClientId}" />
     </application>
 
 </manifest>
