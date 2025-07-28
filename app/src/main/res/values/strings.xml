@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">DietLens</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="google_maps_key">${BuildConfig.MAPS_API_KEY}</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_product_title">Choose the right product</string>
+    <string name="onboarding_product_subtitle">For your dietary needs</string>
+    <string name="onboarding_favourite_title">Save to favorites</string>
+    <string name="onboarding_favourite_subtitle">For quick access</string>
+    <string name="onboarding_cafe_title">Find cafes that cater to you</string>
+    <string name="onboarding_cafe_subtitle">For a delightful experience</string>
 </resources>

@@ -127,8 +127,9 @@ dependencies {
     implementation (libs.accompanist.permissions)
 
     //firebase
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
