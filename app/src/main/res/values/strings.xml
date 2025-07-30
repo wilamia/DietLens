@@ -2,6 +2,7 @@
     <string name="app_name">DietLens</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="google_maps_key">${BuildConfig.MAPS_API_KEY}</string>
+    <!--Onboarding screen-->
     <string name="onboarding_next">Next</string>
     <string name="onboarding_product_title">Choose the right product</string>
     <string name="onboarding_product_subtitle">For your dietary needs</string>
@@ -9,4 +10,14 @@
     <string name="onboarding_favourite_subtitle">For quick access</string>
     <string name="onboarding_cafe_title">Find cafes that cater to you</string>
     <string name="onboarding_cafe_subtitle">For a delightful experience</string>
+    <!--Login screen-->
+    <string name="login_welcome_back">Welcome back</string>
+    <string name="login_access_motivation">sign in to access your account</string>
+    <string name="login_enter_email">sign in to access your account</string>
+    <string name="login_password">Password</string>
+    <string name="login_remember_me">Remember me</string>
+    <string name="login_forgot_password">Forgot password ?</string>
+    <string name="login_next">Next</string>
+    <string name="login_new_member">New Member? </string>
+    <string name="login_register_now">Register now</string>
 </resources>

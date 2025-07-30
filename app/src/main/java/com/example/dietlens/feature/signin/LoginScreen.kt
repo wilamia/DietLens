@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -43,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -79,12 +81,13 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "Welcome back", fontSize = 24.sp,
+                stringResource(R.string.login_welcome_back),
+                fontSize = 24.sp,
                 color = Color(0xFF252525),
                 fontFamily = MontserratMedium
             )
             Text(
-                "sign in to access your account",
+                stringResource(R.string.login_access_motivation),
                 fontFamily = MontserratLight,
                 color = Color(0xFF252525),
                 fontSize = 14.sp,
@@ -95,7 +98,7 @@ fun LoginScreen(
                 onValueChange = { email = it },
                 placeholder = {
                     Text(
-                        "Enter your email",
+                        stringResource(R.string.login_enter_email),
                         color = Gray70,
                         fontFamily = MontserratLight
                     )
@@ -127,7 +130,7 @@ fun LoginScreen(
                 onValueChange = { password = it },
                 placeholder = {
                     Text(
-                        "Password",
+                        stringResource(R.string.login_password),
                         color = Gray70,
                         fontFamily = MontserratLight
                     )
@@ -164,7 +167,7 @@ fun LoginScreen(
                     Box(
                         modifier = Modifier
                             .size(20.dp)
-                            .clip(RoundedCornerShape(3.dp)) // закругляем форму
+                            .clip(RoundedCornerShape(3.dp))
                             .border(1.dp, Color(0xFFCBCBCB), RoundedCornerShape(3.dp)),
 
                         contentAlignment = Alignment.Center
@@ -180,12 +183,15 @@ fun LoginScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(8.dp)) // немного отступа
-                    Text("Remember me", fontSize = 12.sp)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        stringResource(R.string.login_remember_me),
+                        fontSize = 12.sp
+                    )
                 }
 
                 Text(
-                    text = "Forgot password ?",
+                    text = stringResource(R.string.login_forgot_password),
                     color = Color(0xFF6C63FF),
                     fontSize = 12.sp,
                     modifier = Modifier.clickable { onForgotPasswordClick() }
@@ -212,13 +218,13 @@ fun LoginScreen(
                 )
             ) {
                 Text(
-                    "Next",
+                    stringResource(R.string.login_next),
                     fontSize = 16.sp,
                     fontFamily = MontserratSemiBold
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
-                    Icons.Default.KeyboardArrowRight,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = null
                 )
             }
@@ -227,12 +233,13 @@ fun LoginScreen(
 
             Row {
                 Text(
-                    "New Member? ",
+                    stringResource(R.string.login_new_member),
                     fontSize = 14.sp,
                     fontFamily = MontserratMedium
                 )
+                Spacer(modifier = Modifier.width(5.dp))
                 Text(
-                    text = "Register now",
+                    text = stringResource(R.string.login_register_now),
                     fontSize = 14.sp,
                     color = Color(0xFF6C63FF),
                     fontFamily = MontserratSemiBold,
