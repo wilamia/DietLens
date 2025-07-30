@@ -1,4 +1,4 @@
-package com.example.dietlens.feature.onboarding.presentation
+package com.example.dietlens.feature.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.dietlens.R
 import kotlinx.coroutines.delay
 import androidx.compose.ui.unit.sp
+import com.example.dietlens.feature.onboarding.presentation.OnboardingViewModel
 import com.example.dietlens.feature.onboarding.presentation.animation.FadeInAnimation
 import com.example.dietlens.theme.DarkText
 import com.example.dietlens.theme.MontserratBold

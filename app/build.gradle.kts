@@ -35,9 +35,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
-        manifestPlaceholders["auth0ClientId"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
-        manifestPlaceholders["auth0Scheme"] = secrets.getProperty("AUTH0_SCHEME") ?: ""
-        manifestPlaceholders["auth0Domain"] = secrets.getProperty("AUTH0_DOMAIN") ?: ""
+        resValue ("string", "default_web_client_id", secrets.getProperty("DEFAULT_WEB_CLIENT_ID") ?: "")
     }
 
     buildTypes {
@@ -102,10 +100,6 @@ dependencies {
     kapt (libs.androidx.room.compiler)
     implementation( libs.androidx.room.ktx)
 
-    // Auth0
-    implementation (libs.auth0)
-    implementation (libs.androidx.browser)
-
     // Barcode Scanner (MLKit)
     implementation (libs.barcode.scanning)
 
@@ -128,9 +122,10 @@ dependencies {
 
     //firebase
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
     implementation(libs.firebase.analytics)
 
-    implementation(libs.material3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
