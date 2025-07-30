@@ -1,8 +1,10 @@
-package com.example.dietlens.feature.signin
+package com.example.dietlens.feature.signin.presentation
 
-import androidx.compose.foundation.MutatePriority
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,36 +20,27 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dietlens.R
@@ -56,16 +49,33 @@ import com.example.dietlens.theme.Gray70
 import com.example.dietlens.theme.MontserratLight
 import com.example.dietlens.theme.MontserratMedium
 import com.example.dietlens.theme.MontserratSemiBold
+import com.example.dietlens.theme.Purple
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
 
 @Composable
 fun LoginScreen(
-    onLoginClick: () -> Unit = {},
+    viewModel: LoginViewModel,
+    onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit = {},
-    onForgotPasswordClick: () -> Unit = {}
+    onForgotPasswordClick: () -> Unit = {},
+    googleSignInClient: GoogleSignInClient
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var rememberMe by remember { mutableStateOf(false) }
+    val isLoading by viewModel.isLoading.collectAsState()
+    val uiErrorMessage by viewModel.errorMessage.collectAsState()
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let { intent ->
+                viewModel.handleGoogleSignInResult(intent, onLoginClick)
+            }
+        } else {
+            viewModel.sendGoogleLoginError(GoogleSignInStatusCodes.SIGN_IN_CANCELLED)
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -160,40 +170,14 @@ fun LoginScreen(
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        modifier = Modifier
-                            .size(20.dp)
-                            .clip(RoundedCornerShape(3.dp))
-                            .border(1.dp, Color(0xFFCBCBCB), RoundedCornerShape(3.dp)),
-
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Checkbox(
-                            checked = rememberMe,
-                            onCheckedChange = { rememberMe = it },
-                            colors = CheckboxDefaults.colors(
-                                checkedColor = Color(0xFF6C63FF),
-                                uncheckedColor = Color.Transparent,
-                                checkmarkColor = Color.White,
-                            )
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        stringResource(R.string.login_remember_me),
-                        fontSize = 12.sp
-                    )
-                }
-
                 Text(
                     text = stringResource(R.string.login_forgot_password),
                     color = Color(0xFF6C63FF),
                     fontSize = 12.sp,
+                    textAlign = TextAlign.Right,
                     modifier = Modifier.clickable { onForgotPasswordClick() }
                 )
             }
@@ -206,8 +190,23 @@ fun LoginScreen(
                 .align(Alignment.BottomCenter),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            uiErrorMessage?.let {
+                Text(
+                    text = stringResource(id = it),
+                    color = Color.Red,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(23.dp))
+
             Button(
-                onClick = onLoginClick,
+                onClick = {
+                    viewModel.login(email, password) {
+                        onLoginClick()
+                    }
+                },
+                enabled = !isLoading,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -228,6 +227,38 @@ fun LoginScreen(
                     contentDescription = null
                 )
             }
+
+            Spacer(modifier = Modifier.height(23.dp))
+            Button(
+                onClick = {
+                    val signInIntent = googleSignInClient.signInIntent
+                    launcher.launch(signInIntent)
+                },
+                enabled = !isLoading,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                ),
+                border = BorderStroke(1.dp, Color.Gray)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_google_logo),
+                    contentDescription = stringResource(R.string.google_sign_in),
+                    modifier = Modifier.size(24.dp),
+                    tint = Purple
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = stringResource(R.string.sign_in_with_google),
+                    fontSize = 16.sp,
+                    fontFamily = MontserratSemiBold
+                )
+            }
+
 
             Spacer(modifier = Modifier.height(23.dp))
 
