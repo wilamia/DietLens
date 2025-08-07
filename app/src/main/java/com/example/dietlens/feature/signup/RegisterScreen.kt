@@ -55,12 +55,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
 fun RegisterScreen(
     viewModel: RegisterViewModel,
-    onSuccess: () -> Unit,
+    onSuccess: (String) -> Unit,
     onLoginClick: () -> Unit,
     onTermsClick: () -> Unit
 ) {
@@ -70,7 +71,17 @@ fun RegisterScreen(
     var password by rememberSaveable { mutableStateOf("") }
     var agreedToTerms by rememberSaveable { mutableStateOf(false) }
     val state by viewModel.state.collectAsState()
-    val context = LocalContext.current
+
+    var handledSuccess by remember { mutableStateOf(false) }
+
+    LaunchedEffect(state.isSuccess) {
+        if (state.isSuccess && !handledSuccess) {
+            handledSuccess = true
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+            uid?.let { onSuccess(it) }
+        }
+    }
+
 
     Box(
         modifier = Modifier
@@ -124,7 +135,8 @@ fun RegisterScreen(
                 value = password,
                 onValueChange = { password = it },
                 placeholder = "Strong Password",
-                iconVector = Icons.Default.Lock
+                iconVector = Icons.Default.Lock,
+                isPassword = true
             )
             Spacer(modifier = Modifier.height(17.dp))
 
@@ -172,21 +184,18 @@ fun RegisterScreen(
             }
             Button(
                 onClick = {
-                    viewModel.onRegisterClick(
-                        fullName,
-                        email,
-                        phoneNumber,
-                        password,
-                        agreedToTerms
-                    )
+                    viewModel.onRegisterClick(fullName, email, phoneNumber, password, agreedToTerms)
                 },
+                enabled = !state.isLoading && !state.isSuccess,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Purple,
-                    contentColor = Color.White
+                    contentColor = Color.White,
+                    disabledContainerColor = Gray20,
+                    disabledContentColor = Color.Gray
                 )
             ) {
 

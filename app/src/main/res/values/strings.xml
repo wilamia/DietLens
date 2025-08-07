@@ -33,4 +33,13 @@
     <string name="google_sign_in_failed">Failed to sign in with Google.</string>
     <string name="google_sign_in_network_error">Network error. Please check your connection.</string>
     <string name="google_sign_in_unknown_error">Unknown error occurred during Google sign-in.</string>
+    <string name="allergy_screen_title">Do you have any food allergies?</string>
+    <string name="allergy_gluten">Gluten</string>
+    <string name="allergy_lactose">Lactose</string>
+    <string name="allergy_nuts">Nuts</string>
+    <string name="allergy_seafood">Seafood</string>
+    <string name="allergy_eggs">Eggs</string>
+    <string name="allergy_soy">Soy</string>
+    <string name="allergy_fruits">Fruits</string>
+    <string name="button_continue">Continue</string>
 </resources>

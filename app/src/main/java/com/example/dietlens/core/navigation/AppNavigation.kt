@@ -21,6 +21,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.dietlens.BuildConfig
+import com.example.dietlens.feature.allergy.AllergySelectionScreen
 import com.example.dietlens.feature.onboarding.presentation.OnboardingScreen
 import com.example.dietlens.feature.onboarding.presentation.OnboardingViewModel
 import com.example.dietlens.feature.splash.SplashScreen
@@ -50,6 +51,18 @@ fun AppNavigation(
                 onNotLoggedIn = {
                     navController.navigate("onboarding") {
                         popUpTo("splash") { inclusive = true }
+                    }
+                }
+            )
+        }
+        composable("allergy_selection/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId") ?: return@composable
+            AllergySelectionScreen(
+                viewModel = hiltViewModel(),
+                userId = userId,
+                onComplete = {
+                    navController.navigate("home") {
+                        popUpTo("register") { inclusive = true }
                     }
                 }
             )
@@ -87,7 +100,11 @@ fun AppNavigation(
                 onLoginClick = { navController.popBackStack() },
                 onTermsClick = { /* TODO: handle terms */ },
                 viewModel = registerViewModel,
-                onSuccess = { navController.navigate("main") }
+                onSuccess = { uid ->
+                    navController.navigate("allergy_selection/$uid") {
+                        popUpTo("register") { inclusive = true }
+                    }
+                }
             )
         }
 

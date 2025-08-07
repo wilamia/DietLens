@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dietlens.R
+import com.example.dietlens.feature.allergy.AllergyPreferences
 import com.example.dietlens.feature.signup.domain.RegisterUserUseCase
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
@@ -22,14 +23,11 @@ import kotlinx.coroutines.tasks.await
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase,
-    private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<RegisterUiState>(RegisterUiState())
     val state = _state.asStateFlow()
-    private val _errorMessage = MutableStateFlow<Int?>(null)
-    val errorMessage: StateFlow<Int?> = _errorMessage
 
     fun onRegisterClick(fullName: String, email: String, phone: String, password: String, agreedToTerms: Boolean) {
         if (!agreedToTerms) {
@@ -69,5 +67,15 @@ class RegisterViewModel @Inject constructor(
         return null
     }
 
-
-}
+    suspend fun saveAllergyPreferences(userId: String, preferences: AllergyPreferences, onDone: () -> Unit) {
+            try {
+                firestore.collection("users")
+                    .document(userId)
+                    .update("allergies", preferences)
+                    .await()
+                onDone()
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(error = "Failed to save allergy data: ${e.message}")
+            }
+        }
+    }
