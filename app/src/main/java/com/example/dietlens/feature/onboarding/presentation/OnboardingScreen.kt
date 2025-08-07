@@ -22,7 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,8 +47,8 @@ fun OnboardingScreen(
     onFinish: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var currentPage by remember { mutableStateOf(viewModel.currentPage) }
-    var visible by remember { mutableStateOf(true) }
+    var currentPage by rememberSaveable { mutableStateOf(viewModel.currentPage) }
+    var visible by rememberSaveable { mutableStateOf(true) }
 
     FadeInOutAnimation(
         visible = visible,

@@ -29,6 +29,7 @@ playServicesMaps = "19.2.0"
 retrofit = "3.0.0"
 roomRuntime = "2.7.2"
 workRuntimeKtx = "2.10.2"
+firebaseFirestoreKtx = "25.1.4"
 
 
 [libraries]
@@ -73,6 +74,7 @@ maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = 
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

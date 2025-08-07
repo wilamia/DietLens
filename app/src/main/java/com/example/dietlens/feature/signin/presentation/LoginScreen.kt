@@ -33,6 +33,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,24 +59,12 @@ fun LoginScreen(
     viewModel: LoginViewModel,
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit = {},
-    onForgotPasswordClick: () -> Unit = {},
-    googleSignInClient: GoogleSignInClient
+    onForgotPasswordClick: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
     val isLoading by viewModel.isLoading.collectAsState()
     val uiErrorMessage by viewModel.errorMessage.collectAsState()
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.let { intent ->
-                viewModel.handleGoogleSignInResult(intent, onLoginClick)
-            }
-        } else {
-            viewModel.sendGoogleLoginError(GoogleSignInStatusCodes.SIGN_IN_CANCELLED)
-        }
-    }
 
     Box(
         modifier = Modifier
@@ -92,9 +81,9 @@ fun LoginScreen(
         ) {
             Text(
                 stringResource(R.string.login_welcome_back),
-                fontSize = 24.sp,
+                fontSize = 36.sp,
                 color = Color(0xFF252525),
-                fontFamily = MontserratMedium
+                fontFamily = MontserratSemiBold
             )
             Text(
                 stringResource(R.string.login_access_motivation),
@@ -227,38 +216,6 @@ fun LoginScreen(
                     contentDescription = null
                 )
             }
-
-            Spacer(modifier = Modifier.height(23.dp))
-            Button(
-                onClick = {
-                    val signInIntent = googleSignInClient.signInIntent
-                    launcher.launch(signInIntent)
-                },
-                enabled = !isLoading,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color.Black
-                ),
-                border = BorderStroke(1.dp, Color.Gray)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_google_logo),
-                    contentDescription = stringResource(R.string.google_sign_in),
-                    modifier = Modifier.size(24.dp),
-                    tint = Purple
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.sign_in_with_google),
-                    fontSize = 16.sp,
-                    fontFamily = MontserratSemiBold
-                )
-            }
-
 
             Spacer(modifier = Modifier.height(23.dp))
 

@@ -60,44 +60,5 @@ class LoginViewModel @Inject constructor(
             )
         }
     }
-    fun loginWithGoogle(idToken: String, onSuccess: () -> Unit) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            val result = loginUseCase.loginWithGoogle(idToken)
-            _isLoading.value = false
-            result.fold(
-                onSuccess = {
-                    _errorMessage.value = null
-                    onSuccess()
-                },
-                onFailure = {
-                    _errorMessage.value = R.string.login_incorrect_error
-                }
-            )
-        }
-    }
-    fun handleGoogleSignInResult(data: Intent?, onSuccess: () -> Unit) {
-        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-        try {
-            val account = task.getResult(ApiException::class.java)
-            val idToken = account.idToken
-            if (idToken != null) {
-                loginWithGoogle(idToken, onSuccess)
-            } else {
-                _errorMessage.value = R.string.google_token_missing
-            }
-        } catch (e: ApiException) {
-            sendGoogleLoginError(e.statusCode)
-        }
-    }
-
-    fun sendGoogleLoginError(code: Int) {
-        _errorMessage.value = when (code) {
-            GoogleSignInStatusCodes.SIGN_IN_CANCELLED -> R.string.google_sign_in_cancelled
-            GoogleSignInStatusCodes.SIGN_IN_FAILED -> R.string.google_sign_in_failed
-            GoogleSignInStatusCodes.NETWORK_ERROR -> R.string.google_sign_in_network_error
-            else -> R.string.google_sign_in_unknown_error
-        }
-    }
 
 }
