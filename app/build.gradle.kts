@@ -35,7 +35,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
-        resValue ("string", "default_web_client_id", secrets.getProperty("DEFAULT_WEB_CLIENT_ID") ?: "")
+        buildConfigField(
+            "String",
+            "DEFAULT_WEB_CLIENT_ID",
+            "\"${secrets.getProperty("DEFAULT_WEB_CLIENT_ID") ?: ""}\""
+        )
     }
 
     buildTypes {
@@ -55,14 +59,7 @@ android {
         jvmTarget = "11"
     }
 
-    buildTypes {
-        debug {
-            manifestPlaceholders["AUTH0_CLIENT_ID"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
-        }
-        release {
-            manifestPlaceholders["AUTH0_CLIENT_ID"] = secrets.getProperty("AUTH0_CLIENT_ID") ?: ""
-        }
-    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -86,6 +83,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.firebase.firestore.ktx)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 

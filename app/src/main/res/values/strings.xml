@@ -2,9 +2,7 @@
     <string name="app_name">DietLens</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="google_maps_key">${BuildConfig.MAPS_API_KEY}</string>
-    <string name="com_auth0_client_id">${BuildConfig.AUTH0_CLIENT_ID}</string>
-    <string name="com_auth0_domain">${BuildConfig.AUTH0_DOMAIN}.auth0.com</string>
-    <string name="auth0_scheme">${AUTH0_SCHEME}</string>
+    <string name="default_web_client_id">${BuildConfig.MAPS_API_KEY}</string>
     <!--Onboarding screen-->
     <string name="onboarding_next">Next</string>
     <string name="onboarding_product_title">Choose the right product</string>

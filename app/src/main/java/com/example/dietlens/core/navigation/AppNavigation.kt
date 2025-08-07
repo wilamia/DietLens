@@ -20,12 +20,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.dietlens.BuildConfig
 import com.example.dietlens.feature.onboarding.presentation.OnboardingScreen
 import com.example.dietlens.feature.onboarding.presentation.OnboardingViewModel
 import com.example.dietlens.feature.splash.SplashScreen
 import com.example.dietlens.feature.signin.presentation.LoginScreen
 import com.example.dietlens.feature.signin.presentation.LoginViewModel
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.example.dietlens.feature.signup.RegisterScreen
+import com.example.dietlens.feature.signup.RegisterViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
@@ -33,16 +35,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 fun AppNavigation(
     navController: NavHostController
 ) {
-    val context = LocalContext.current
-
     val viewModel: OnboardingViewModel = hiltViewModel()
 
-    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken(context.getString(R.string.default_web_client_id)) // Твой client_id из google-services.json
-        .requestEmail()
-        .build()
-
-    val googleSignInClient = GoogleSignIn.getClient(context, gso)
 
     NavHost(navController = navController, startDestination = "splash") {
         composable("splash") {
@@ -81,11 +75,22 @@ fun AppNavigation(
                         popUpTo("login") { inclusive = true }
                     }
                 },
-                onRegisterClick = { /* Навигация к регистрации */ },
-                onForgotPasswordClick = { /* ... */ },
-                googleSignInClient = googleSignInClient // Передаем клиент в LoginScreen
+                onRegisterClick = {
+                    navController.navigate("register")
+                },
+                onForgotPasswordClick = { /* ... */ }
             )
         }
+        composable("register") {
+            val registerViewModel: RegisterViewModel = hiltViewModel()
+            RegisterScreen(
+                onLoginClick = { navController.popBackStack() },
+                onTermsClick = { /* TODO: handle terms */ },
+                viewModel = registerViewModel,
+                onSuccess = { navController.navigate("main") }
+            )
+        }
+
 
         composable("main") {
             MainScreen(
@@ -103,7 +108,7 @@ fun AppNavigation(
 @Composable
 fun MainScreen(onLogoutClick: () -> Unit) {
     Scaffold(
-        // твой UI
+
     ) { padding ->
         Column(
             modifier = Modifier
