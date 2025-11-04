@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
 }
@@ -21,6 +21,19 @@ if (secretFile.exists()) {
     println("WARNING: secret.properties not found!")
 }
 
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+        vendor.set(JvmVendorSpec.ADOPTIUM)
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 android {
     namespace = "com.example.dietlens"
     compileSdk = 36
@@ -33,8 +46,26 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "MAPS_API_KEY",
+            "\"${secrets.getProperty("MAPS_API_KEY") ?: ""}\""
+        )
+
+        manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
+        buildConfigField(
+            "String",
+            "DEFAULT_WEB_CLIENT_ID",
+            "\"${secrets.getProperty("DEFAULT_WEB_CLIENT_ID") ?: ""}\""
+        )
     }
 
+    packaging {
+        resources {
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -45,20 +76,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    defaultConfig {
-        manifestPlaceholders["MAPS_API_KEY"] = secrets.getProperty("MAPS_API_KEY") ?: ""
-        buildConfigField("String", "MAPS_API_KEY", "\"${secrets.getProperty("MAPS_API_KEY") ?: ""}\"")
-
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    bundle {
+        abi {
+            enableSplit = true
+        }
     }
 }
 
@@ -66,7 +94,7 @@ dependencies {
     // Lifecycle + ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -79,7 +107,9 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.scenecore)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
     // Retrofit + Moshi
@@ -89,36 +119,34 @@ dependencies {
     implementation(libs.moshi.kotlin)
 
     // Room
-    implementation (libs.androidx.room.runtime)
-    kapt (libs.androidx.room.compiler)
-    implementation( libs.androidx.room.ktx)
-
-    // Auth0
-    implementation (libs.auth0)
-    implementation (libs.androidx.browser)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
     // Barcode Scanner (MLKit)
-    implementation (libs.barcode.scanning)
+    implementation(libs.barcode.scanning)
 
     // Google Maps Compose
-    implementation (libs.maps.compose)
-    implementation (libs.play.services.maps)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
 
     // WorkManager
-    implementation (libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
 
     // DataStore
-    implementation (libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences)
 
     // Coil для Compose
     implementation(libs.coil.compose)
 
     // Accompanist
-    implementation (libs.accompanist.systemuicontroller)
-    implementation (libs.accompanist.permissions)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.permissions)
 
     //firebase
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
     implementation(libs.firebase.analytics)
 
     testImplementation(libs.junit)
@@ -128,6 +156,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.converter.gson)
 
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
 
+    implementation(libs.places)
+
+    implementation(libs.material3)
+    implementation(libs.androidx.material.icons.extended)
+    //noinspection Aligned16KB
+    implementation(libs.translate)
+    implementation(libs.language.id)
+    implementation(libs.kotlinx.coroutines.play.services)
 }

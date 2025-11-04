@@ -1,0 +1,153 @@
+<resources>
+    <string name="app_name">DietLens</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="google_maps_key">${BuildConfig.MAPS_API_KEY}</string>
+    <string name="default_web_client_id">${BuildConfig.DEFAULT_WEB_CLIENT_ID}</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_product_title">Выбирайте правильные продукты</string>
+    <string name="onboarding_product_subtitle">С учётом ваших потребностей</string>
+    <string name="onboarding_favourite_title">Сохраняйте в избранное</string>
+    <string name="onboarding_favourite_subtitle">Для быстрого доступа</string>
+    <string name="onboarding_cafe_title">Находите кафе под ваши нужды</string>
+    <string name="onboarding_cafe_subtitle">Чтобы было приятно и удобно</string>
+
+    <!-- Login -->
+    <string name="login_welcome_back">С возвращением</string>
+    <string name="login_access_motivation">Войдите, чтобы получить доступ к аккаунту</string>
+    <string name="login_enter_email">Email</string>
+    <string name="login_password">Пароль</string>
+    <string name="login_forgot_password">Забыли пароль?</string>
+    <string name="login_next">Войти</string>
+    <string name="login_new_member">Новый пользователь?</string>
+    <string name="login_register_now">Зарегистрируйтесь</string>
+    <string name="login_email_error">Поле email не может быть пустым</string>
+    <string name="login_password_error">Поле пароля не может быть пустым</string>
+    <string name="login_password_email_error">Поля email и пароль не могут быть пустыми</string>
+    <string name="login_incorrect_error">Неверный email или пароль</string>
+    <string name="login_email_invalid_error">Введите корректный адрес email</string>
+    <string name="login_password_invalid_error">Пароль должен быть не короче 8 символов, содержать цифру и заглавную букву</string>
+
+    <!-- Google sign-in -->
+    <string name="sign_in_with_google">Войти через Google</string>
+    <string name="google_sign_in">Иконка входа Google</string>
+    <string name="google_token_missing">Не удалось получить ID-токен.</string>
+    <string name="google_sign_in_cancelled">Вход отменён пользователем.</string>
+    <string name="google_sign_in_failed">Не удалось выполнить вход через Google.</string>
+    <string name="google_sign_in_network_error">Ошибка сети. Проверьте соединение.</string>
+    <string name="google_sign_in_unknown_error">Неизвестная ошибка при входе через Google.</string>
+
+    <!-- Allergies -->
+    <string name="allergy_screen_title">У вас есть пищевые аллергии?</string>
+    <string name="allergy_gluten">Глютен</string>
+    <string name="allergy_lactose">Лактоза</string>
+    <string name="allergy_nuts">Орехи</string>
+    <string name="allergy_seafood">Морепродукты</string>
+    <string name="allergy_eggs">Яйца</string>
+    <string name="allergy_soy">Соя</string>
+    <string name="allergy_fruits">Фрукты</string>
+    <string name="button_continue">Продолжить</string>
+
+    <!-- Password recovery -->
+    <string name="recover_title">Восстановление доступа</string>
+    <string name="recovery_explanation">Укажите email — мы пришлём ссылку для сброса пароля.</string>
+    <string name="enter_mail">Введите email</string>
+    <string name="send_link">Отправить ссылку</string>
+    <string name="send_email">Письмо отправлено</string>
+    <string name="check_email">Проверьте почту: %1$s.\nСсылка для сброса уже там.</string>
+    <string name="back_to_login">Вернуться к входу</string>
+    <string name="try_again">Попробовать снова</string>
+
+    <!-- History / Profile -->
+    <string name="traces">Следы</string>
+    <string name="history_title">История сканирований</string>
+    <string name="empty_history_product">Пусто. Отсканируйте продукт камерой — он появится здесь.</string>
+    <string name="close_history">Закрыть</string>
+    <string name="barcode_history">Штрих-код: %1$s</string>
+    <string name="allergies_history">Аллергены: %1$s</string>
+
+    <string name="hi_profile">Привет, %1$s!</string>
+    <string name="preferences_profile">Предпочтения</string>
+    <string name="change_name_profile">Сменить имя</string>
+    <string name="liked_products">Избранное</string>
+    <string name="logout">Выйти</string>
+    <string name="profile_delete_account">Удалить аккаунт</string>
+    <string name="profile_scan_history">История сканирований</string>
+    <string name="profile_preferences_title">Предпочтения</string>
+    <string name="save_profile">Сохранить</string>
+    <string name="saving_profile">Сохраняю…</string>
+    <string name="profile_cancel">Отмена</string>
+    <string name="change_name">Сменить имя</string>
+    <string name="name">Имя</string>
+    <string name="favourite_products_sheet">Избранные продукты</string>
+    <string name="empty_products_sheet">Пусто. Поставьте лайк продукту в карточке, и он появится здесь.</string>
+    <string name="enter_barcode">Ввести штрих-код</string>
+    <string name="choose_camera">Камера</string>
+    <string name="searching_product">Ищем продукт…</string>
+    <string name="translating_to_your_language">Переводим на ваш язык…</string>
+
+    <!-- Product details -->
+    <string name="empty_brand">Бренд не указан</string>
+    <string name="name_not_found">Название не найдено</string>
+    <string name="ingredients">Ингредиенты</string>
+    <string name="scanned">Сканировано %1$s</string>
+    <string name="nutrients">Пищевая ценность</string>
+    <string name="nutri_score">Nutri-Score</string>
+    <string name="energy">Энергия</string>
+    <string name="fats">Жиры</string>
+    <string name="fats_more">в т.ч. насыщенные</string>
+    <string name="carbs">Углеводы</string>
+    <string name="sugar">в т.ч. сахар</string>
+    <string name="protein">Белки</string>
+    <string name="fiber">Клетчатка</string>
+    <string name="salt">Соль</string>
+    <string name="kkal">ккал</string>
+    <string name="grams">г</string>
+
+    <string name="cat_all">Все</string>
+    <string name="cat_beverages">Напитки</string>
+    <string name="cat_juices">Соки</string>
+    <string name="cat_carbonated_drinks">Газированные напитки</string>
+    <string name="cat_teas_and_coffees">Чай и кофе</string>
+    <string name="cat_alcoholic_beverages">Алкогольные напитки</string>
+    <string name="cat_snacks">Закуски</string>
+    <string name="cat_sweet_snacks">Сладкие закуски</string>
+    <string name="cat_salty_snacks">Соленые закуски</string>
+    <string name="cat_chocolates">Шоколад</string>
+    <string name="cat_crisps">Чипсы</string>
+    <string name="cat_biscuits_and_cakes">Печенье и торты</string>
+    <string name="cat_desserts">Десерты</string>
+    <string name="cat_dairies">Молочные продукты</string>
+    <string name="cat_milks">Молоко</string>
+    <string name="cat_yogurts">Йогурты</string>
+    <string name="cat_cheeses">Сыры</string>
+    <string name="cat_plant_based_foods_and_beverages">Растительные продукты</string>
+    <string name="cat_plant_based_milks">Растительное молоко</string>
+    <string name="cat_meals">Готовые блюда</string>
+    <string name="cat_sauces">Соусы</string>
+    <string name="cat_groceries">Бакалея</string>
+    <string name="cat_pastas">Макароны</string>
+    <string name="cat_canned_foods">Консервы</string>
+    <string name="cat_breakfasts">Продукты для завтрака</string>
+    <string name="cat_breads">Хлебобулочные изделия</string>
+    <string name="cat_soups">Супы</string>
+    <string name="cat_meats">Мясо и мясные продукты</string>
+    <string name="cat_seafood">Рыба и морепродукты</string>
+    <string name="cat_plant_based_foods">Фрукты и овощи</string>
+    <string name="cat_frozen_foods">Замороженные продукты</string>
+    <string name="check_product">Проверить продукт</string>
+    <string name="warning">Внимание! Обнаружены аллергены: %1$s</string>
+    <string name="history_stats">Всего: %1$d | Опасных: %2$d</string>
+    <string name="nutrient_unit">%1$s %2$s</string>
+
+    <string name="allergen_gluten">Глютен</string>
+    <string name="allergen_lactose">Лактоза</string>
+    <string name="allergen_nuts">Орехи</string>
+    <string name="allergen_soy">Соя</string>
+    <string name="allergen_eggs">Яйца</string>
+    <string name="allergen_seafood">Морепродукты</string>
+    <string name="allergen_fruits">Фрукты</string>
+
+</resources>

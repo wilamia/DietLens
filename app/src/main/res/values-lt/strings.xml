@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DietLens</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="google_maps_key">${BuildConfig.MAPS_API_KEY}</string>
+    <string name="default_web_client_id">${BuildConfig.DEFAULT_WEB_CLIENT_ID}</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_next">Kitas</string>
+    <string name="onboarding_product_title">Rinkitės tinkamą produktą</string>
+    <string name="onboarding_product_subtitle">Pagal jūsų mitybos poreikius</string>
+    <string name="onboarding_favourite_title">Išsaugokite mėgstamiausius</string>
+    <string name="onboarding_favourite_subtitle">Greitai prieigai</string>
+    <string name="onboarding_cafe_title">Raskite jums tinkančių kavinių</string>
+    <string name="onboarding_cafe_subtitle">Kad būtų malonu ir patogu</string>
+
+    <!-- Login -->
+    <string name="login_welcome_back">Sveiki sugrįžę</string>
+    <string name="login_access_motivation">Prisijunkite, kad pasiektumėte savo paskyrą</string>
+    <string name="login_enter_email">El. paštas</string>
+    <string name="login_password">Slaptažodis</string>
+    <string name="login_forgot_password">Pamiršote slaptažodį?</string>
+    <string name="login_next">Prisijungti</string>
+    <string name="login_new_member">Naujas narys?</string>
+    <string name="login_register_now">Registruokitės dabar</string>
+    <string name="login_email_error">El. pašto laukas negali būti tuščias</string>
+    <string name="login_password_error">Slaptažodžio laukas negali būti tuščias</string>
+    <string name="login_password_email_error">El. pašto ir slaptažodžio laukai negali būti tušti</string>
+    <string name="login_incorrect_error">Neteisingas el. paštas arba slaptažodis</string>
+    <string name="login_email_invalid_error">Įveskite galiojantį el. pašto adresą</string>
+    <string name="login_password_invalid_error">Slaptažodis turi būti bent 8 simbolių, su skaičiumi ir didžiąja raide</string>
+
+    <!-- Google sign-in -->
+    <string name="sign_in_with_google">Prisijungti su „Google“</string>
+    <string name="google_sign_in">„Google“ prisijungimo piktograma</string>
+    <string name="google_token_missing">Nepavyko gauti ID žetono.</string>
+    <string name="google_sign_in_cancelled">Prisijungimas atšauktas naudotojo.</string>
+    <string name="google_sign_in_failed">Nepavyko prisijungti per „Google“.</string>
+    <string name="google_sign_in_network_error">Tinklo klaida. Patikrinkite ryšį.</string>
+    <string name="google_sign_in_unknown_error">Nežinoma klaida prisijungiant per „Google“.</string>
+
+    <!-- Allergies -->
+    <string name="allergy_screen_title">Ar turite maisto alergijų?</string>
+    <string name="allergy_gluten">Glitimas</string>
+    <string name="allergy_lactose">Laktozė</string>
+    <string name="allergy_nuts">Riešutai</string>
+    <string name="allergy_seafood">Jūros gėrybės</string>
+    <string name="allergy_eggs">Kiaušiniai</string>
+    <string name="allergy_soy">Soja</string>
+    <string name="allergy_fruits">Vaisiai</string>
+    <string name="button_continue">Tęsti</string>
+
+    <!-- Password recovery -->
+    <string name="recover_title">Prieigos atkūrimas</string>
+    <string name="recovery_explanation">Įveskite el. paštą — atsiųsime slaptažodžio atkūrimo nuorodą.</string>
+    <string name="enter_mail">Įveskite el. paštą</string>
+    <string name="send_link">Siųsti nuorodą</string>
+    <string name="send_email">Laiškas išsiųstas</string>
+    <string name="check_email">Patikrinkite paštą: %1$s.\nSlaptažodžio atkūrimo nuoroda jau ten.</string>
+    <string name="back_to_login">Grįžti į prisijungimą</string>
+    <string name="try_again">Bandyti dar kartą</string>
+
+    <!-- History / Profile -->
+    <string name="traces">Pėdsakai</string>
+    <string name="history_title">Skenavimo istorija</string>
+    <string name="empty_history_product">Tuščia. Nuskenuokite produktą kamera — jis atsiras čia.</string>
+    <string name="close_history">Uždaryti</string>
+    <string name="barcode_history">Brūkšninis kodas: %1$s</string>
+    <string name="allergies_history">Alergenai: %1$s</string>
+
+    <string name="hi_profile">Sveiki, %1$s!</string>
+    <string name="preferences_profile">Pirmenybės</string>
+    <string name="change_name_profile">Pakeisti vardą</string>
+    <string name="liked_products">Mėgstamiausi</string>
+    <string name="logout">Atsijungti</string>
+    <string name="profile_delete_account">Ištrinti paskyrą</string>
+    <string name="profile_scan_history">Skenavimo istorija</string>
+    <string name="profile_preferences_title">Pirmenybės</string>
+    <string name="save_profile">Išsaugoti</string>
+    <string name="saving_profile">Saugoma…</string>
+    <string name="profile_cancel">Atšaukti</string>
+    <string name="change_name">Pakeisti vardą</string>
+    <string name="name">Vardas</string>
+    <string name="favourite_products_sheet">Mėgstamiausi produktai</string>
+    <string name="empty_products_sheet">Tuščia. Pamėkite produktą kortelėje — jis atsiras čia.</string>
+    <string name="enter_barcode">Įveskite brūkšninį kodą</string>
+    <string name="choose_camera">Kamera</string>
+    <string name="searching_product">Ieškome produkto…</string>
+    <string name="translating_to_your_language">Verčiame į jūsų kalbą…</string>
+
+    <!-- Product details -->
+    <string name="empty_brand">Prekės ženklas nenurodytas</string>
+    <string name="name_not_found">Pavadinimas nerastas</string>
+    <string name="ingredients">Sudedamosios dalys</string>
+    <string name="scanned">Nuskenuota %1$s</string>
+    <string name="nutrients">Maistinė vertė</string>
+    <string name="nutri_score">Nutri-Score</string>
+    <string name="energy">Energija</string>
+    <string name="fats">Riebalai</string>
+    <string name="fats_more">iš jų sočiųjų</string>
+    <string name="carbs">Angliavandeniai</string>
+    <string name="sugar">iš jų cukrų</string>
+    <string name="protein">Baltymai</string>
+    <string name="fiber">Skaidulos</string>
+    <string name="salt">Druska</string>
+    <string name="kkal">kcal</string>
+    <string name="grams">g</string>
+
+    <string name="cat_all">Visi</string>
+    <string name="cat_beverages">Gėrimai</string>
+    <string name="cat_juices">Sultys</string>
+    <string name="cat_carbonated_drinks">Gazuoti gėrimai</string>
+    <string name="cat_teas_and_coffees">Arbatos ir kava</string>
+    <string name="cat_alcoholic_beverages">Alkoholiai gėrimai</string>
+    <string name="cat_snacks">Užkandžiai</string>
+    <string name="cat_sweet_snacks">Saldūs užkandžiai</string>
+    <string name="cat_salty_snacks">Sūrūs užkandžiai</string>
+    <string name="cat_chocolates">Šokoladai</string>
+    <string name="cat_crisps">Traškučiai</string>
+    <string name="cat_biscuits_and_cakes">Sausainiai ir pyragai</string>
+    <string name="cat_desserts">Desertai</string>
+    <string name="cat_dairies">Pieno produktai</string>
+    <string name="cat_milks">Pienas</string>
+    <string name="cat_yogurts">Jogurtai</string>
+    <string name="check_product">Patikrinti produktą</string>
+    <string name="cat_cheeses">Sūriai</string>
+    <string name="cat_plant_based_foods_and_beverages">Augaliniai produktai ir gėrimai</string>
+    <string name="cat_plant_based_milks">Augalinis pienas</string>
+    <string name="cat_meals">Paruošti patiekalai</string>
+    <string name="cat_sauces">Padažai</string>
+    <string name="cat_groceries">Bakalėja</string>
+    <string name="cat_pastas">Makaronai</string>
+    <string name="cat_canned_foods">Konservai</string>
+    <string name="cat_breakfasts">Pusryčių produktai</string>
+    <string name="cat_breads">Duonos gaminiai</string>
+    <string name="cat_soups">Sriubos</string>
+    <string name="cat_meats">Mėsa ir mėsos gaminiai</string>
+    <string name="cat_seafood">Jūros gėrybės</string>
+    <string name="cat_plant_based_foods">Vaisiai ir daržovės</string>
+    <string name="cat_frozen_foods">Šaldyti produktai</string>
+    <string name="warning">Dėmesio! Aptikti alergenai: %1$s</string>
+    <string name="history_stats">Iš viso: %1$d | Pavojingų: %2$d</string>
+    <string name="nutrient_unit">%1$s %2$s</string>
+
+    <string name="allergen_gluten">Glitimas</string>
+    <string name="allergen_lactose">Laktozė</string>
+    <string name="allergen_nuts">Riešutai</string>
+    <string name="allergen_soy">Soja</string>
+    <string name="allergen_eggs">Kiaušiniai</string>
+    <string name="allergen_seafood">Jūros gėrybės</string>
+    <string name="allergen_fruits">Vaisiai</string>
+</resources>

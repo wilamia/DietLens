@@ -67,6 +67,9 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
+app/src/main/jniLibs/
+app/src/main/jni/
+*.so
 # lint/reports/
 # MacOS
 .DS_Store
