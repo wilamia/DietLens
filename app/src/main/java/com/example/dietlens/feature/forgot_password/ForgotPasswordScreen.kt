@@ -1,10 +1,10 @@
 package com.example.dietlens.feature.forgot_password
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Email
@@ -155,12 +155,22 @@ fun ForgotPasswordScreen(
             }
 
             Spacer(Modifier.height(16.dp))
-            Text(
-                stringResource(R.string.back_to_login),
-                color = Buttons,
-                fontSize = 12.sp,
-                modifier = Modifier.clickable { onBack() }
-            )
+            TextButton(
+                onClick = onBack,
+                colors = ButtonDefaults.textButtonColors(contentColor = Buttons)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = null,
+                    tint = Buttons
+                )
+                Spacer(Modifier.width(4.dp))
+                Text(
+                    stringResource(R.string.back_to_login),
+                    fontSize = 12.sp,
+                    fontFamily = MontserratMedium
+                )
+            }
         }
     }
 }
