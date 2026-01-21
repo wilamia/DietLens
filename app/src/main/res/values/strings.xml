@@ -24,6 +24,7 @@
     <string name="login_next">Sign in</string>
     <string name="login_new_member">New member?</string>
     <string name="login_register_now">Register now</string>
+    <string name="login_create_account">Create account</string>
     <string name="login_email_error">Email field cannot be empty</string>
     <string name="login_password_error">Password field cannot be empty</string>
     <string name="login_password_email_error">Email and password fields cannot be empty</string>

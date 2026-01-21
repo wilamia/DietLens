@@ -23,6 +23,7 @@
     <string name="login_next">Войти</string>
     <string name="login_new_member">Новый пользователь?</string>
     <string name="login_register_now">Зарегистрируйтесь</string>
+    <string name="login_create_account">Создать аккаунт</string>
     <string name="login_email_error">Поле email не может быть пустым</string>
     <string name="login_password_error">Поле пароля не может быть пустым</string>
     <string name="login_password_email_error">Поля email и пароль не могут быть пустыми</string>

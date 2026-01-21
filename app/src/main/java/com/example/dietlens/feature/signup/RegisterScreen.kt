@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -20,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -210,15 +212,25 @@ fun RegisterScreen(
             }
             Spacer(modifier = Modifier.height(23.dp))
 
-            Row {
-                Text("Already a member?", fontFamily = MontserratMedium, fontSize = 13.sp)
+            OutlinedButton(
+                onClick = onLoginClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                shape = RoundedCornerShape(10.dp),
+                border = BorderStroke(1.dp, Buttons),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Buttons)
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = null,
+                    tint = Buttons
+                )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Log In",
-                    color = Buttons,
-                    fontSize = 13.sp,
+                    text = stringResource(R.string.back_to_login),
                     fontFamily = MontserratSemiBold,
-                    modifier = Modifier.clickable { onLoginClick() }
+                    fontSize = 16.sp
                 )
             }
 

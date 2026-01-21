@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -219,21 +220,33 @@ fun LoginScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(23.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-            Row {
+            Text(
+                stringResource(R.string.login_new_member),
+                fontSize = 14.sp,
+                fontFamily = MontserratMedium
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedButton(
+                onClick = onRegisterClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                shape = RoundedCornerShape(8.dp),
+                border = BorderStroke(1.dp, Buttons),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Buttons)
+            ) {
                 Text(
-                    stringResource(R.string.login_new_member),
-                    fontSize = 14.sp,
-                    fontFamily = MontserratMedium
+                    text = stringResource(R.string.login_create_account),
+                    fontSize = 16.sp,
+                    fontFamily = MontserratSemiBold
                 )
-                Spacer(modifier = Modifier.width(5.dp))
-                Text(
-                    text = stringResource(R.string.login_register_now),
-                    fontSize = 14.sp,
-                    color = Buttons,
-                    fontFamily = MontserratSemiBold,
-                    modifier = Modifier.clickable { onRegisterClick() }
+                Spacer(modifier = Modifier.width(4.dp))
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = Buttons
                 )
             }
 
